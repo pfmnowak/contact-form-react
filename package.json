@@ -41,5 +41,10 @@
   },
   "devDependencies": {
     "@edx/browserslist-config": "^1.1.1"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "!node_modules/@edx/paragon"
+    ]
   }
 }
