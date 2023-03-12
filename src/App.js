@@ -8,6 +8,10 @@ function App() {
   const locale = LOCALES.ENGLISH;
   // const locale = LOCALES.POLISH;
 
+  const formSubmitHandler = (formData) => {
+    console.log(formData);
+  };
+
   return (
     <div className="App">
       <IntlProvider
@@ -16,7 +20,7 @@ function App() {
         defaultLocale={LOCALES.ENGLISH}
       >
         <header className="App-header">
-          <ContactForm />
+          <ContactForm onFormSubmit={formSubmitHandler} />
         </header>
       </IntlProvider>
     </div>
