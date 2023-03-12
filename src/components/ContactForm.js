@@ -1,22 +1,31 @@
 import { Form } from "@edx/paragon";
+import { FormattedMessage, useIntl } from "react-intl";
 import classes from "./ContactForm.module.scss";
 
 const ContactForm = () => {
+  const intl = useIntl();
   return (
     <Form className={classes["contact-form"]}>
       <Form.Group isInvalid>
-        <Form.Label>First Name</Form.Label>
-        <Form.Control placeholder="Enter first name" />
+        <Form.Label>
+          <FormattedMessage id="first_name_label" />
+        </Form.Label>
+        <Form.Control placeholder={intl.messages.first_name_placeholder} />
         <Form.Control.Feedback>
-          Please provide a valid name
+          <FormattedMessage id="first_name_error" />
         </Form.Control.Feedback>
       </Form.Group>
 
       <Form.Group controlId="formGridEmail" isInvalid>
-        <Form.Label>Email</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" />
+        <Form.Label>
+          <FormattedMessage id="email_label" />
+        </Form.Label>
+        <Form.Control
+          type="email"
+          placeholder={intl.messages.email_placeholder}
+        />
         <Form.Control.Feedback>
-          Please provide a valid email
+          <FormattedMessage id="email_error" />
         </Form.Control.Feedback>
       </Form.Group>
 
