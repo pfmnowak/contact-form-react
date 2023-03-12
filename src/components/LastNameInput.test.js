@@ -20,43 +20,43 @@ async function renderComponent() {
   });
 }
 
-describe("FirstNameInput component", () => {
+describe("LastNameInput component", () => {
   it("doesn't display an error when entering lowercase and uppercase characters", () => {
     renderComponent();
     const nameInput = screen.getByRole("textbox", {
-      name: /first name/i,
+      name: /last name/i,
     });
 
     userEvent.click(nameInput);
     userEvent.keyboard("testName");
 
-    const nameInputError = screen.queryByText(/provide a valid name/i);
+    const nameInputError = screen.queryByText(/provide a valid last name/i);
     expect(nameInputError).not.toBeInTheDocument();
   });
 
   it("displays an error when entering numbers", () => {
     renderComponent();
     const nameInput = screen.getByRole("textbox", {
-      name: /first name/i,
+      name: /last name/i,
     });
 
     userEvent.click(nameInput);
     userEvent.keyboard("TestName1234");
 
-    const nameInputError = screen.getByText(/provide a valid name/i);
+    const nameInputError = screen.getByText(/provide a valid last name/i);
     expect(nameInputError).toBeInTheDocument();
   });
 
   it("displays an error when entering other non-letter signs", () => {
     renderComponent();
     const nameInput = screen.getByRole("textbox", {
-      name: /first name/i,
+      name: /last name/i,
     });
 
     userEvent.click(nameInput);
     userEvent.keyboard("TestName@#$%^&");
 
-    const nameInputError = screen.getByText(/provide a valid name/i);
+    const nameInputError = screen.getByText(/provide a valid last name/i);
     expect(nameInputError).toBeInTheDocument();
   });
 });

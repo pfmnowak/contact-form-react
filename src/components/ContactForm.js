@@ -3,26 +3,28 @@ import { useRef, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import classes from "./ContactForm.module.scss";
 import FirstNameInput from "./FirstNameInput";
+import LastNameInput from "./LastNameInput";
 
 const ContactForm = ({ onFormSubmit }) => {
   const intl = useIntl();
   const [firstNameValid, setFirstNameValid] = useState(true);
+  const [lastNameValid, setLastNameValid] = useState(true);
 
   const firstNameRef = useRef(null);
-  // const lastNameRef = useRef(null);
+  const lastNameRef = useRef(null);
   // const emailRef = useRef(null);
 
   const submitFormHandler = (event) => {
     event.preventDefault();
 
-    if (!firstNameValid) {
+    if (!firstNameValid || !lastNameValid) {
       return;
     }
 
     onFormSubmit({
-      firstName: firstNameRef.current.value,
-      // lastName: lastNameRef.current.value,
-      // email: emailRef.current.value,
+      firstName: firstNameRef.current.value.trim(),
+      lastName: lastNameRef.current.value.trim(),
+      // email: emailRef.current.value.trim(),
     });
 
     clearInputs();
@@ -30,7 +32,7 @@ const ContactForm = ({ onFormSubmit }) => {
 
   const clearInputs = () => {
     firstNameRef.current.value = "";
-    // lastNameRef.current.value = "";
+    lastNameRef.current.value = "";
     // emailRef.current.value = "";
   };
 
@@ -40,6 +42,12 @@ const ContactForm = ({ onFormSubmit }) => {
         inputRef={firstNameRef}
         isValid={firstNameValid}
         setValid={setFirstNameValid}
+      />
+
+      <LastNameInput
+        inputRef={lastNameRef}
+        isValid={lastNameValid}
+        setValid={setLastNameValid}
       />
 
       <Form.Group controlId="formGridEmail" isInvalid>
