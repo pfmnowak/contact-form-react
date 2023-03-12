@@ -11,6 +11,9 @@ export const messages = {
     email_label: "Email",
     email_placeholder: "Enter an email",
     email_error: "Please provide a valid email adress",
+    password_label: "Password",
+    password_placeholder: "Enter a password",
+    password_error: "Password should have between 8 and 30 characters",
   },
   [LOCALES.POLISH]: {
     first_name_label: "Imię",
@@ -22,5 +25,8 @@ export const messages = {
     email_label: "Email",
     email_placeholder: "Wprowadź adres email",
     email_error: "Wprowadź poprawny adres email",
+    password_label: "Hasło",
+    password_placeholder: "Wprowadź hasło",
+    password_error: "Hasło powinno zawierać od 8 do 30 znaków",
   },
 };

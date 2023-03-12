@@ -4,20 +4,23 @@ import classes from "./ContactForm.module.scss";
 import EmailInput from "./EmailInput";
 import FirstNameInput from "./FirstNameInput";
 import LastNameInput from "./LastNameInput";
+import PasswordInput from "./PasswordInput";
 
 const ContactForm = ({ onFormSubmit }) => {
   const [firstNameValid, setFirstNameValid] = useState(true);
   const [lastNameValid, setLastNameValid] = useState(true);
   const [emailValid, setEmailValid] = useState(true);
+  const [passwordValid, setPasswordValid] = useState(true);
 
   const firstNameRef = useRef(null);
   const lastNameRef = useRef(null);
   const emailRef = useRef(null);
+  const passwordRef = useRef(null);
 
   const submitFormHandler = (event) => {
     event.preventDefault();
 
-    if (!firstNameValid || !lastNameValid || !emailValid) {
+    if (!firstNameValid || !lastNameValid || !emailValid || !passwordValid) {
       return;
     }
 
@@ -25,6 +28,7 @@ const ContactForm = ({ onFormSubmit }) => {
       firstName: firstNameRef.current.value.trim(),
       lastName: lastNameRef.current.value.trim(),
       email: emailRef.current.value.trim(),
+      password: passwordRef.current.value,
     });
 
     clearInputs();
@@ -34,6 +38,7 @@ const ContactForm = ({ onFormSubmit }) => {
     firstNameRef.current.value = "";
     lastNameRef.current.value = "";
     emailRef.current.value = "";
+    passwordRef.current.value = "";
   };
 
   return (
@@ -52,6 +57,11 @@ const ContactForm = ({ onFormSubmit }) => {
         inputRef={emailRef}
         isValid={emailValid}
         setValid={setEmailValid}
+      />
+      <PasswordInput
+        inputRef={passwordRef}
+        isValid={passwordValid}
+        setValid={setPasswordValid}
       />
 
       <Button variant="primary" type="submit">
