@@ -20,18 +20,57 @@ const ContactForm = ({ onFormSubmit }) => {
   const submitFormHandler = (event) => {
     event.preventDefault();
 
+    const firstName = firstNameRef.current.value.trim();
+    const lastName = lastNameRef.current.value.trim();
+    const email = emailRef.current.value.trim();
+    const password = passwordRef.current.value.trim();
+
+    if (
+      inputsEmpty({
+        firstName,
+        lastName,
+        email,
+        password,
+      })
+    ) {
+      return;
+    }
+
     if (!firstNameValid || !lastNameValid || !emailValid || !passwordValid) {
       return;
     }
 
     onFormSubmit({
-      firstName: firstNameRef.current.value.trim(),
-      lastName: lastNameRef.current.value.trim(),
-      email: emailRef.current.value.trim(),
-      password: passwordRef.current.value,
+      firstName,
+      lastName,
+      email,
+      password,
     });
 
     clearInputs();
+  };
+
+  const inputsEmpty = ({ firstName, lastName, email, password }) => {
+    let inputsEmpty = false;
+
+    if (firstName === "") {
+      setFirstNameValid(false);
+      inputsEmpty = true;
+    }
+    if (lastName === "") {
+      setLastNameValid(false);
+      inputsEmpty = true;
+    }
+    if (email === "") {
+      setEmailValid(false);
+      inputsEmpty = true;
+    }
+    if (password === "") {
+      setPasswordValid(false);
+      inputsEmpty = true;
+    }
+
+    return inputsEmpty;
   };
 
   const clearInputs = () => {
