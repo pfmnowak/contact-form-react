@@ -14,6 +14,11 @@ export const messages = {
     password_label: "Password",
     password_placeholder: "Enter a password",
     password_error: "Password should have between 8 and 30 characters",
+    country_label: "Country",
+    country_placeholder: "Select a country",
+    country_error: "Please select a country",
+    country_no_data: "Select this option if no countries are visible",
+    submit_button: "Submit",
   },
   [LOCALES.POLISH]: {
     first_name_label: "Imię",
@@ -28,5 +33,10 @@ export const messages = {
     password_label: "Hasło",
     password_placeholder: "Wprowadź hasło",
     password_error: "Hasło powinno zawierać od 8 do 30 znaków",
+    country_label: "Państwo",
+    country_placeholder: "Wybierz państwo",
+    country_error: "Proszę wybrać państwo",
+    country_no_data: "Wybierz tę opcję w przypadku braku państw",
+    submit_button: "Wyślij",
   },
 };

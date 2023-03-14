@@ -1,38 +1,57 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { IntlProvider } from "react-intl";
+import { Provider } from "react-redux";
 import { LOCALES } from "../i18n/locales";
 import { messages } from "../i18n/messages";
+import { store } from "../store/store";
+import { createServer } from "../test/server";
 import ContactForm from "./ContactForm";
 
 function renderComponent() {
   render(
-    <IntlProvider
-      messages={messages[LOCALES.ENGLISH]}
-      locale={LOCALES.ENGLISH}
-      defaultLocale={LOCALES.ENGLISH}
-    >
-      <ContactForm />
-    </IntlProvider>
+    <Provider store={store}>
+      <IntlProvider
+        messages={messages[LOCALES.ENGLISH]}
+        locale={LOCALES.ENGLISH}
+        defaultLocale={LOCALES.ENGLISH}
+      >
+        <ContactForm />
+      </IntlProvider>
+    </Provider>
   );
 }
 
 async function renderComponentWithMock(mock) {
   render(
-    <IntlProvider
-      messages={messages[LOCALES.ENGLISH]}
-      locale={LOCALES.ENGLISH}
-      defaultLocale={LOCALES.ENGLISH}
-    >
-      <ContactForm onFormSubmit={mock} />
-    </IntlProvider>
+    <Provider store={store}>
+      <IntlProvider
+        messages={messages[LOCALES.ENGLISH]}
+        locale={LOCALES.ENGLISH}
+        defaultLocale={LOCALES.ENGLISH}
+      >
+        <ContactForm onFormSubmit={mock} />
+      </IntlProvider>
+    </Provider>
   );
-  await screen.findByRole("button", {
-    name: /submit/i,
-  });
+  await screen.findByRole("option", { name: /poland/i });
 }
 
 describe("ContactForm component", () => {
+  createServer([
+    {
+      path: "https://restcountries.com/v3.1/all",
+      res: () => {
+        return [
+          { name: { common: "Cambodia" } },
+          { name: { common: "Poland" } },
+          { name: { common: "England" } },
+          { name: { common: "France" } },
+        ];
+      },
+    },
+  ]);
+
   it("renders a name input", () => {
     renderComponent();
     const nameInput = screen.getByRole("textbox", {
@@ -63,6 +82,14 @@ describe("ContactForm component", () => {
     expect(passwordInput).toBeInTheDocument();
   });
 
+  it("renders a country select", () => {
+    renderComponent();
+    const countrySelect = screen.getByRole("combobox", {
+      name: /country/i,
+    });
+    expect(countrySelect).toBeInTheDocument();
+  });
+
   it("renders a submit button", () => {
     renderComponent();
     const submitButton = screen.getByRole("button", {
@@ -71,7 +98,7 @@ describe("ContactForm component", () => {
     expect(submitButton).toBeInTheDocument();
   });
 
-  it("calls onUserAdd when valid form is submitted", () => {
+  it("calls onUserAdd when valid form is submitted", async () => {
     const mock = jest.fn();
     renderComponentWithMock(mock);
 
@@ -85,6 +112,10 @@ describe("ContactForm component", () => {
       name: /email/i,
     });
     const passwordInput = screen.getByLabelText(/password/i);
+    const countrySelect = screen.getByRole("combobox", {
+      name: /country/i,
+    });
+    const testOption = await screen.findByRole("option", { name: /poland/i });
 
     userEvent.click(nameInput);
     userEvent.keyboard("Roman");
@@ -98,6 +129,8 @@ describe("ContactForm component", () => {
     userEvent.click(passwordInput);
     userEvent.keyboard("qweRTY123$%^&*");
 
+    userEvent.selectOptions(countrySelect, testOption);
+
     const submitButton = screen.getByRole("button", {
       name: /submit/i,
     });
@@ -109,10 +142,11 @@ describe("ContactForm component", () => {
       lastName: "Romanowski",
       email: "roman@gmail.com",
       password: "qweRTY123$%^&*",
+      country: "Poland",
     });
   });
 
-  it("doesn't submit invalid form", () => {
+  it("doesn't submit invalid form", async () => {
     const mock = jest.fn();
     renderComponentWithMock(mock);
 
@@ -126,6 +160,10 @@ describe("ContactForm component", () => {
       name: /email/i,
     });
     const passwordInput = screen.getByLabelText(/password/i);
+    const countrySelect = screen.getByRole("combobox", {
+      name: /country/i,
+    });
+    const testOption = await screen.findByRole("option", { name: /poland/i });
 
     userEvent.click(nameInput);
     userEvent.keyboard("Roman123");
@@ -138,6 +176,8 @@ describe("ContactForm component", () => {
 
     userEvent.click(passwordInput);
     userEvent.keyboard("qweRTY123$%^&*");
+
+    userEvent.selectOptions(countrySelect, testOption);
 
     const submitButton = screen.getByRole("button", {
       name: /submit/i,
@@ -159,7 +199,7 @@ describe("ContactForm component", () => {
     expect(mock).toHaveBeenCalledTimes(0);
   });
 
-  it("clears the inputs when the form is submitted", () => {
+  it("clears the inputs when the form is submitted", async () => {
     renderComponentWithMock(() => {});
 
     const nameInput = screen.getByRole("textbox", {
@@ -172,6 +212,10 @@ describe("ContactForm component", () => {
       name: /email/i,
     });
     const passwordInput = screen.getByLabelText(/password/i);
+    const countrySelect = screen.getByRole("combobox", {
+      name: /country/i,
+    });
+    const testOption = await screen.findByRole("option", { name: /poland/i });
 
     userEvent.click(nameInput);
     userEvent.keyboard("Roman");
@@ -185,6 +229,8 @@ describe("ContactForm component", () => {
     userEvent.click(passwordInput);
     userEvent.keyboard("qweRTY123$%^&*");
 
+    userEvent.selectOptions(countrySelect, testOption);
+
     const submitButton = screen.getByRole("button", {
       name: /submit/i,
     });
@@ -194,5 +240,6 @@ describe("ContactForm component", () => {
     expect(lastNameInput).toHaveValue("");
     expect(emailInput).toHaveValue("");
     expect(passwordInput).toHaveValue("");
+    expect(countrySelect).toHaveValue("");
   });
 });
