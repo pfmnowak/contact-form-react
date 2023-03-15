@@ -1,0 +1,24 @@
+.contact-page {
+  background-color: #282c34;
+  background-image: linear-gradient(
+    to bottom,
+    #005f6b,
+    #195161,
+    #254454,
+    #293745,
+    #282c34
+  );
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: black;
+
+  &__header {
+    color: #fff;
+    font-size: 3rem;
+    text-transform: uppercase;
+    margin-bottom: 5rem;
+  }
+}

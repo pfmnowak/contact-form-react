@@ -2,6 +2,7 @@ import { LOCALES } from "./locales";
 
 export const messages = {
   [LOCALES.ENGLISH]: {
+    contact_page_header: "Contact Form",
     first_name_label: "First Name",
     first_name_placeholder: "Enter first name",
     first_name_error: "Please provide a valid name",
@@ -13,7 +14,8 @@ export const messages = {
     email_error: "Please provide a valid email adress",
     password_label: "Password",
     password_placeholder: "Enter a password",
-    password_error: "Password should have between 8 and 30 characters",
+    password_error:
+      "Password should have between 8 and 30 characters, and no spaces",
     country_label: "Country",
     country_placeholder: "Select a country",
     country_error: "Please select a country",
@@ -21,6 +23,7 @@ export const messages = {
     submit_button: "Submit",
   },
   [LOCALES.POLISH]: {
+    contact_page_header: "Formularz kontaktowy",
     first_name_label: "Imię",
     first_name_placeholder: "Wprowadź imię",
     first_name_error: "Wprowadź poprawne imię",
@@ -32,7 +35,7 @@ export const messages = {
     email_error: "Wprowadź poprawny adres email",
     password_label: "Hasło",
     password_placeholder: "Wprowadź hasło",
-    password_error: "Hasło powinno zawierać od 8 do 30 znaków",
+    password_error: "Hasło powinno zawierać od 8 do 30 znaków, bez spacji",
     country_label: "Państwo",
     country_placeholder: "Wybierz państwo",
     country_error: "Proszę wybrać państwo",
