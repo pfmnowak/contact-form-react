@@ -1,0 +1,55 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  @include respond(tab-land) {
+    font-size: 90%;
+  }
+
+  @include respond(tab-port) {
+    font-size: 80%;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: var(--color-primary);
+  color: #fff;
+}
+
+a,
+button,
+input,
+select,
+textarea {
+  &:focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  [data-whatinput="keyboard"] &:focus {
+    box-shadow: 0 0 0 2px var(--color-primary) !important;
+  }
+}
+
+button {
+  &:focus::before {
+    content: none !important;
+  }
+
+  &:active {
+    transition: transform 0.2s ease;
+    transform: translateY(1px);
+  }
+}

@@ -126,7 +126,7 @@ const ContactForm = ({ onFormSubmit }) => {
         setValid={setCountryValid}
       />
 
-      <Button variant="primary" type="submit">
+      <Button variant="success" type="submit">
         <FormattedMessage id="submit_button" />
       </Button>
     </Form>
