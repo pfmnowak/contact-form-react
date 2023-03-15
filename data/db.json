@@ -1,0 +1,12 @@
+{
+  "items": [
+    {
+      "id": "1",
+      "firstName": "some_string",
+      "lastName": "some_string",
+      "email": "some_string",
+      "password": "some_string",
+      "country": "some_string"
+    }
+  ]
+}

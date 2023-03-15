@@ -21,6 +21,8 @@ export const messages = {
     country_error: "Please select a country",
     country_no_data: "Select this option if no countries are visible",
     submit_button: "Submit",
+    toast_success: "Successfully sent the form data!",
+    toast_error: "Error occured when sending a form data!",
   },
   [LOCALES.POLISH]: {
     contact_page_header: "Formularz kontaktowy",
@@ -41,5 +43,7 @@ export const messages = {
     country_error: "Proszę wybrać państwo",
     country_no_data: "Wybierz tę opcję w przypadku braku państw",
     submit_button: "Wyślij",
+    toast_success: "Formularz został przesłany!",
+    toast_error: "Wystąpił błąd podczas wysyłania formularza!",
   },
 };
