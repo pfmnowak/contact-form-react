@@ -34,7 +34,7 @@ const CountrySelect = ({ inputRef, isValid, setValid }) => {
       <Form.Label>
         <FormattedMessage id="country_label" />
       </Form.Label>
-      {!isLoading && <CustomSpinner />}
+      {isLoading && <CustomSpinner />}
       <Form.Control ref={inputRef} as="select" onChange={countryChangeHandler}>
         <option value="">
           <FormattedMessage id="country_placeholder" />
