@@ -23,6 +23,7 @@ export const messages = {
     submit_button: "Submit",
     toast_success: "Successfully sent the form data!",
     toast_error: "Error occured when sending a form data!",
+    loading: "Loading",
   },
   [LOCALES.POLISH]: {
     contact_page_header: "Formularz kontaktowy",
@@ -45,5 +46,6 @@ export const messages = {
     submit_button: "Wyślij",
     toast_success: "Formularz został przesłany!",
     toast_error: "Wystąpił błąd podczas wysyłania formularza!",
+    loading: "Ładowanie",
   },
 };

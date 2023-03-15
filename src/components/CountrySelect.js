@@ -1,6 +1,7 @@
-import { Form, Spinner } from "@edx/paragon";
+import { Form } from "@edx/paragon";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useGetAllCountriesQuery } from "../services/countries";
+import CustomSpinner from "./CustomSpinner";
 
 const CountrySelect = ({ inputRef, isValid, setValid }) => {
   const intl = useIntl();
@@ -32,14 +33,8 @@ const CountrySelect = ({ inputRef, isValid, setValid }) => {
     <Form.Group isInvalid={!isValid}>
       <Form.Label>
         <FormattedMessage id="country_label" />
-        {isLoading && (
-          <Spinner
-            animation="border"
-            // className="spinner" // style
-            screenReaderText="loading"
-          />
-        )}
       </Form.Label>
+      {!isLoading && <CustomSpinner />}
       <Form.Control ref={inputRef} as="select" onChange={countryChangeHandler}>
         <option value="">
           <FormattedMessage id="country_placeholder" />
