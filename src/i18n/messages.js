@@ -2,6 +2,7 @@ import { LOCALES } from "./locales";
 
 export const messages = {
   [LOCALES.ENGLISH]: {
+    language: "Language",
     contact_page_header: "Contact Form",
     first_name_label: "First Name",
     first_name_placeholder: "Enter first name",
@@ -26,6 +27,7 @@ export const messages = {
     loading: "Loading",
   },
   [LOCALES.POLISH]: {
+    language: "Język",
     contact_page_header: "Formularz kontaktowy",
     first_name_label: "Imię",
     first_name_placeholder: "Wprowadź imię",
